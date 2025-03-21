@@ -1,0 +1,51 @@
+Flight Number,Airline,Departure Code,Departure Airport,Arrival Code,Arrival Airport,Scheduled Departure,Estimated Departure,Scheduled Arrival,Estimated Arrival,Flight Status,Departure Weather,Arrival Weather
+SW318,Delta Airlines,LAX,Los Angeles International Airport,JFK,John F. Kennedy International Airport,2025-03-20 13:08:00,2025-03-20 13:13:00,2025-03-20 17:08:00,2025-03-20 18:13:00,Cancelled,Clear,Sunny
+SW925,United Airlines,DEN,Denver International Airport,MIA,Miami International Airport,2025-03-20 17:39:00,2025-03-20 18:09:00,2025-03-20 23:39:00,2025-03-21 00:09:00,On Time,Rainy,Cloudy
+DL544,JetBlue Airways,GNV,Gainesville Regional Airport,ATL,Hartsfield-Jackson Atlanta International Airport,2025-03-21 05:41:00,2025-03-21 05:56:00,2025-03-21 07:41:00,2025-03-21 11:56:00,Delayed,Rainy,Rainy
+AA304,Delta Airlines,JFK,John F. Kennedy International Airport,GNV,Gainesville Regional Airport,2025-03-20 14:47:00,2025-03-20 14:47:00,2025-03-20 17:47:00,2025-03-20 17:47:00,Delayed,Foggy,Cloudy
+DL668,JetBlue Airways,ATL,Hartsfield-Jackson Atlanta International Airport,GNV,Gainesville Regional Airport,2025-03-20 22:30:00,2025-03-20 22:45:00,2025-03-21 01:30:00,2025-03-21 03:45:00,Cancelled,Cloudy,Rainy
+DL192,Delta Airlines,GNV,Gainesville Regional Airport,ORD,O'Hare International Airport,2025-03-20 15:25:00,2025-03-20 15:40:00,2025-03-20 21:25:00,2025-03-20 20:40:00,Delayed,Sunny,Cloudy
+UA611,United Airlines,GNV,Gainesville Regional Airport,DEN,Denver International Airport,2025-03-20 19:25:00,2025-03-20 20:25:00,2025-03-20 22:25:00,2025-03-20 23:25:00,On Time,Rainy,Rainy
+SW456,Southwest Airlines,SFO,San Francisco International Airport,DEN,Denver International Airport,2025-03-20 20:54:00,2025-03-20 20:54:00,2025-03-21 02:54:00,2025-03-20 22:54:00,On Time,Foggy,Clear
+SW794,JetBlue Airways,JFK,John F. Kennedy International Airport,ORD,O'Hare International Airport,2025-03-20 18:37:00,2025-03-20 19:07:00,2025-03-20 20:37:00,2025-03-21 00:07:00,On Time,Sunny,Cloudy
+DL909,JetBlue Airways,ATL,Hartsfield-Jackson Atlanta International Airport,LAX,Los Angeles International Airport,2025-03-20 13:32:00,2025-03-20 13:47:00,2025-03-20 19:32:00,2025-03-20 18:47:00,Cancelled,Cloudy,Stormy
+UA172,United Airlines,MIA,Miami International Airport,JFK,John F. Kennedy International Airport,2025-03-20 16:10:00,2025-03-20 16:40:00,2025-03-20 21:10:00,2025-03-20 22:40:00,Delayed,Clear,Sunny
+JB998,JetBlue Airways,LAS,Harry Reid International Airport,MCO,Orlando International Airport,2025-03-21 00:37:00,2025-03-21 00:42:00,2025-03-21 03:37:00,2025-03-21 04:42:00,Delayed,Stormy,Sunny
+JB463,JetBlue Airways,LAS,Harry Reid International Airport,GNV,Gainesville Regional Airport,2025-03-21 00:05:00,2025-03-21 01:05:00,2025-03-21 03:05:00,2025-03-21 04:05:00,Delayed,Clear,Clear
+UA295,Southwest Airlines,LAX,Los Angeles International Airport,LAS,Harry Reid International Airport,2025-03-20 23:32:00,2025-03-20 23:37:00,2025-03-21 02:32:00,2025-03-21 02:37:00,On Time,Clear,Stormy
+JB399,Delta Airlines,LAX,Los Angeles International Airport,JFK,John F. Kennedy International Airport,2025-03-20 10:50:00,2025-03-20 11:20:00,2025-03-20 13:50:00,2025-03-20 17:20:00,Cancelled,Cloudy,Rainy
+AA263,Delta Airlines,LAS,Harry Reid International Airport,SFO,San Francisco International Airport,2025-03-20 08:56:00,2025-03-20 08:56:00,2025-03-20 13:56:00,2025-03-20 14:56:00,Cancelled,Clear,Clear
+UA273,Delta Airlines,SEA,Seattle-Tacoma International Airport,MCO,Orlando International Airport,2025-03-20 17:18:00,2025-03-20 17:18:00,2025-03-20 23:18:00,2025-03-20 19:18:00,On Time,Stormy,Rainy
+UA199,Southwest Airlines,GNV,Gainesville Regional Airport,SEA,Seattle-Tacoma International Airport,2025-03-21 03:23:00,2025-03-21 03:53:00,2025-03-21 07:23:00,2025-03-21 09:53:00,On Time,Stormy,Cloudy
+AA802,JetBlue Airways,SEA,Seattle-Tacoma International Airport,MIA,Miami International Airport,2025-03-20 18:26:00,2025-03-20 18:41:00,2025-03-21 00:26:00,2025-03-20 23:41:00,Delayed,Sunny,Stormy
+UA195,American Airlines,LAS,Harry Reid International Airport,ATL,Hartsfield-Jackson Atlanta International Airport,2025-03-21 04:12:00,2025-03-21 05:12:00,2025-03-21 10:12:00,2025-03-21 07:12:00,Delayed,Stormy,Sunny
+DL998,JetBlue Airways,SEA,Seattle-Tacoma International Airport,ATL,Hartsfield-Jackson Atlanta International Airport,2025-03-21 00:02:00,2025-03-21 01:02:00,2025-03-21 05:02:00,2025-03-21 05:02:00,Delayed,Stormy,Rainy
+SW793,American Airlines,MCO,Orlando International Airport,LAS,Harry Reid International Airport,2025-03-20 09:55:00,2025-03-20 10:25:00,2025-03-20 11:55:00,2025-03-20 16:25:00,Delayed,Sunny,Foggy
+JB537,United Airlines,MCO,Orlando International Airport,LAX,Los Angeles International Airport,2025-03-20 21:32:00,2025-03-20 22:02:00,2025-03-21 02:32:00,2025-03-21 04:02:00,On Time,Stormy,Cloudy
+SW121,American Airlines,ORD,O'Hare International Airport,DEN,Denver International Airport,2025-03-20 13:20:00,2025-03-20 14:20:00,2025-03-20 17:20:00,2025-03-20 17:20:00,Cancelled,Sunny,Rainy
+UA546,JetBlue Airways,DEN,Denver International Airport,ATL,Hartsfield-Jackson Atlanta International Airport,2025-03-20 12:11:00,2025-03-20 12:16:00,2025-03-20 15:11:00,2025-03-20 16:16:00,On Time,Stormy,Cloudy
+UA111,United Airlines,LAX,Los Angeles International Airport,SFO,San Francisco International Airport,2025-03-20 21:43:00,2025-03-20 22:43:00,2025-03-20 23:43:00,2025-03-21 00:43:00,Delayed,Sunny,Cloudy
+SW111,JetBlue Airways,DEN,Denver International Airport,MIA,Miami International Airport,2025-03-20 17:59:00,2025-03-20 18:14:00,2025-03-20 21:59:00,2025-03-21 00:14:00,Cancelled,Sunny,Sunny
+JB528,American Airlines,JFK,John F. Kennedy International Airport,MCO,Orlando International Airport,2025-03-20 16:35:00,2025-03-20 17:05:00,2025-03-20 18:35:00,2025-03-20 23:05:00,Cancelled,Stormy,Clear
+SW147,American Airlines,MIA,Miami International Airport,LAX,Los Angeles International Airport,2025-03-20 22:27:00,2025-03-20 22:32:00,2025-03-21 03:27:00,2025-03-21 00:32:00,On Time,Clear,Clear
+AA862,United Airlines,SFO,San Francisco International Airport,LAX,Los Angeles International Airport,2025-03-20 22:06:00,2025-03-20 22:36:00,2025-03-21 04:06:00,2025-03-21 04:36:00,Delayed,Rainy,Clear
+DL458,United Airlines,MIA,Miami International Airport,MCO,Orlando International Airport,2025-03-21 00:56:00,2025-03-21 01:01:00,2025-03-21 03:56:00,2025-03-21 07:01:00,Cancelled,Rainy,Rainy
+DL806,Delta Airlines,DFW,Dallas/Fort Worth International Airport,LAS,Harry Reid International Airport,2025-03-20 08:33:00,2025-03-20 09:33:00,2025-03-20 14:33:00,2025-03-20 15:33:00,Cancelled,Stormy,Cloudy
+AA718,United Airlines,SEA,Seattle-Tacoma International Airport,DEN,Denver International Airport,2025-03-20 14:40:00,2025-03-20 15:10:00,2025-03-20 16:40:00,2025-03-20 19:10:00,Delayed,Sunny,Clear
+JB169,American Airlines,JFK,John F. Kennedy International Airport,ORD,O'Hare International Airport,2025-03-21 05:23:00,2025-03-21 05:28:00,2025-03-21 10:23:00,2025-03-21 10:28:00,On Time,Cloudy,Rainy
+SW149,JetBlue Airways,ATL,Hartsfield-Jackson Atlanta International Airport,LAS,Harry Reid International Airport,2025-03-21 01:11:00,2025-03-21 01:16:00,2025-03-21 05:11:00,2025-03-21 07:16:00,Cancelled,Rainy,Foggy
+AA831,JetBlue Airways,MCO,Orlando International Airport,MIA,Miami International Airport,2025-03-20 19:53:00,2025-03-20 20:53:00,2025-03-20 22:53:00,2025-03-21 01:53:00,Delayed,Clear,Rainy
+UA140,Delta Airlines,MCO,Orlando International Airport,GNV,Gainesville Regional Airport,2025-03-21 04:15:00,2025-03-21 04:45:00,2025-03-21 09:15:00,2025-03-21 06:45:00,Cancelled,Rainy,Cloudy
+JB691,Delta Airlines,DEN,Denver International Airport,JFK,John F. Kennedy International Airport,2025-03-20 20:25:00,2025-03-20 21:25:00,2025-03-20 23:25:00,2025-03-21 00:25:00,Cancelled,Rainy,Sunny
+SW982,JetBlue Airways,MIA,Miami International Airport,MCO,Orlando International Airport,2025-03-20 10:05:00,2025-03-20 10:10:00,2025-03-20 16:05:00,2025-03-20 13:10:00,On Time,Clear,Rainy
+JB247,JetBlue Airways,JFK,John F. Kennedy International Airport,MIA,Miami International Airport,2025-03-20 23:25:00,2025-03-20 23:25:00,2025-03-21 05:25:00,2025-03-21 05:25:00,On Time,Foggy,Sunny
+SW788,JetBlue Airways,JFK,John F. Kennedy International Airport,GNV,Gainesville Regional Airport,2025-03-20 08:09:00,2025-03-20 08:09:00,2025-03-20 14:09:00,2025-03-20 14:09:00,On Time,Sunny,Sunny
+JB246,JetBlue Airways,LAX,Los Angeles International Airport,DEN,Denver International Airport,2025-03-20 18:52:00,2025-03-20 19:07:00,2025-03-20 22:52:00,2025-03-21 00:07:00,Cancelled,Rainy,Clear
+UA246,American Airlines,ORD,O'Hare International Airport,JFK,John F. Kennedy International Airport,2025-03-21 05:21:00,2025-03-21 05:51:00,2025-03-21 07:21:00,2025-03-21 10:51:00,Cancelled,Stormy,Cloudy
+AA222,United Airlines,ORD,O'Hare International Airport,SFO,San Francisco International Airport,2025-03-20 21:32:00,2025-03-20 21:37:00,2025-03-20 23:32:00,2025-03-20 23:37:00,Delayed,Cloudy,Rainy
+SW106,Delta Airlines,LAX,Los Angeles International Airport,SFO,San Francisco International Airport,2025-03-20 18:11:00,2025-03-20 18:26:00,2025-03-20 20:11:00,2025-03-20 21:26:00,Delayed,Rainy,Sunny
+DL504,JetBlue Airways,ORD,O'Hare International Airport,GNV,Gainesville Regional Airport,2025-03-20 18:14:00,2025-03-20 19:14:00,2025-03-20 22:14:00,2025-03-21 00:14:00,Delayed,Stormy,Clear
+DL477,United Airlines,LAS,Harry Reid International Airport,SFO,San Francisco International Airport,2025-03-20 07:02:00,2025-03-20 07:02:00,2025-03-20 12:02:00,2025-03-20 11:02:00,On Time,Clear,Cloudy
+DL661,United Airlines,DFW,Dallas/Fort Worth International Airport,ATL,Hartsfield-Jackson Atlanta International Airport,2025-03-21 03:26:00,2025-03-21 03:41:00,2025-03-21 05:26:00,2025-03-21 05:41:00,Delayed,Stormy,Sunny
+JB522,American Airlines,LAX,Los Angeles International Airport,GNV,Gainesville Regional Airport,2025-03-21 04:55:00,2025-03-21 05:25:00,2025-03-21 09:55:00,2025-03-21 11:25:00,On Time,Stormy,Foggy
+JB445,American Airlines,SEA,Seattle-Tacoma International Airport,SFO,San Francisco International Airport,2025-03-21 03:30:00,2025-03-21 04:30:00,2025-03-21 08:30:00,2025-03-21 08:30:00,Cancelled,Foggy,Cloudy

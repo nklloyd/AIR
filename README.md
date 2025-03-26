@@ -1,3 +1,10 @@
+# AIR Overview
+
+Useful API: https://github.com/macsencasaus/jetapi/
+--> Sources data from JetPhotos and FlightRadar24. Based off aircraft registration.
+--> http://localhost:8080/api?reg=g-xlea
+-----> Replace g-xlea with respective aircraft registration
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

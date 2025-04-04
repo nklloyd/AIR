@@ -1,3 +1,10 @@
+import React from 'react';
+import MapComponent from '../components/MapComponent';
+
 export function Map() {
-    return <h1>Map</h1>
+    return (
+        <div className="h-full w-full">
+            <MapComponent />
+        </div>
+    );
 }

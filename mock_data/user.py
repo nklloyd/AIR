@@ -69,10 +69,10 @@ A32Q = Aircraft(
      engines = "Pratt & Whitney PW1100G",
      engine_thrust = 24000, #lbs
      wingspan = 117.5, #ft
-     range = 9320, #miles
+     range = 4026, #miles
      speed = 517, #mph
      seats = 194,
-     fun_fact = "The Airbus A321 NEO is one of the most efficient narrobody aircraft in operation, with each passenger getting the equivalent efficiency of over 100 mpg on transcontinental flights."
+     fun_fact = "The Airbus A321 NEO is one of the most efficient narrowbody aircraft in operation, with each passenger getting the equivalent efficiency of over 100 mpg on transcontinental flights."
 )
 
 
@@ -87,12 +87,27 @@ DL108ATLMAD20250414 = Flight("Monday, April 14, 2025", "7:20 PM", "9:35 AM +", "
 Nicholas = User("Nicholas")
 Nicholas.top_aircraft = A32Q
 Nicholas.next_flight = DL108ATLMAD20250414
+Nicholas.mlg = 1385974
+Nicholas.flight_count = 924
 
-# API Functions
+# User API
 @app.route('/get_username')
 def get_username():
      return(jsonify({"message": Nicholas.name}))
 
+@app.route('/get_flight_count')
+def get_flight_count():
+     return(jsonify({"message": Nicholas.flight_count}))
+
+@app.route('/get_mlg')
+def get_mlg():
+     return(jsonify({"message": Nicholas.mlg}))
+
+@app.route('/get_around_earth')
+def get_around_earth():
+     return(jsonify({"message": round(Nicholas.mlg/24901, 1)}))
+
+# Next flight API
 @app.route('/get_next_flight_date')
 def get_next_flight_date():
      return(jsonify({"message": Nicholas.next_flight.date}))

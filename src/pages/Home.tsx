@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 export function Home() {
 
     const [username, setUsername] = useState('');
+    const [flightCount, setFlightCount] = useState('');
+    const [mlg, setMlg] = useState('');
+    const [aroundEarth, setAroundEarth] = useState('');
 
     const [nextFlightNumber, setNextFlightNumber] = useState('');
     const [nextFlightDate, setNextFlightDate] = useState('');
@@ -49,6 +52,33 @@ export function Home() {
             } else { alert('Error') }
         };
         getUsername();
+
+        const getFlightCount = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_flight_count');
+            if (response.ok) {
+                const data = await response.json();
+                setFlightCount(data.message);
+            } else { alert('Error') }
+        };
+        getFlightCount();
+
+        const getMlg = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_mlg');
+            if (response.ok) {
+                const data = await response.json();
+                setMlg(data.message);
+            } else { alert('Error') }
+        };
+        getMlg();
+
+        const getAroundEarth = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_around_earth');
+            if (response.ok) {
+                const data = await response.json();
+                setAroundEarth(data.message);
+            } else { alert('Error') }
+        };
+        getAroundEarth();
 
         const getNextFlightNumber = async () => {
             const response = await fetch('http://127.0.0.1:5000/get_next_flight_number');
@@ -365,37 +395,59 @@ export function Home() {
             <br></br>
             <br></br>
 
-            <p className="text-2xl">You're top aircraft is the {topAircraftManufacturer} {topAircraftName}</p>
+            <p className="text-2xl">Your Stats:</p>
             <div className="relative grid grid-cols-[2fr_0.1fr_2fr_0.1fr_2fr] grid-rows-[1fr_2fr]">
-                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Seats</div>
+                <div className="bg-indigo-950 leading-[1.85rem] text-1xl text-white">Miles Flown</div>
                 <div></div>
-                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Range</div>
+                <div className="bg-indigo-950 leading-[1.85rem] text-1xl text-white">Total Flights</div>
                 <div></div>
-                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Speed</div>
-                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftSeats}</div>
+                <div className="bg-indigo-950 leading-[1.85rem] text-1xl text-white">Top Airline</div>
+                <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">{mlg}</div>
                 <div></div>
-                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftRange} Miles</div>
+                <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">{flightCount} Miles</div>
                 <div></div>
-                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftSpeed} MPH</div>
+                <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">Delta</div>
+            </div>
+            <div className="pl-4 pr-4 pt-2 pb-2 bg-indigo-800">
+                <p className="leading-loose text-indigo-300 font-bold">Around the world</p>
+                <p className="text-1xl leading-normal text-white">You've flown around the world {aroundEarth} times.</p>
             </div>
             <br></br>
+            <br></br>
+
+
+            <p className="text-2xl">You're top aircraft is the {topAircraftManufacturer} {topAircraftName}</p>
+            <div className="relative grid grid-cols-[2fr_0.1fr_2fr_0.1fr_2fr] grid-rows-[1fr_2fr]">
+                <div className="bg-rose-950 leading-[1.85rem] text-1xl text-white">Seats</div>
+                <div></div>
+                <div className="bg-rose-950 leading-[1.85rem] text-1xl text-white">Range</div>
+                <div></div>
+                <div className="bg-rose-950 leading-[1.85rem] text-1xl text-white">Speed</div>
+                <div className="bg-rose-800 leading-[3.5rem] text-2xl text-white">{topAircraftSeats}</div>
+                <div></div>
+                <div className="bg-rose-800 leading-[3.5rem] text-2xl text-white">{topAircraftRange} Miles</div>
+                <div></div>
+                <div className="bg-rose-800 leading-[3.5rem] text-2xl text-white">{topAircraftSpeed} MPH</div>
+            </div>
+            <br></br>
+
             <p className="text-2xl">{topAircraftManufacturer} {topAircraftName}: Technical Specs</p>
             <div className="relative grid grid-cols-[3fr_3fr] grid-rows-[3fr_1fr_3fr_1fr_3fr_1fr_3fr_1fr]">
-                <div className="bg-teal-400 leading-[3rem] text-1xl">Maximum Takeoff Weight</div>
-                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftMtow} lbs</div>
+                <div className="bg-rose-950 leading-[3rem] text-1xl text-white">Maximum Takeoff Weight</div>
+                <div className="bg-rose-800 leading-[3rem] text-1xl text-white">{topAircraftMtow} lbs</div>
                 <div></div><div></div>
-                <div className="bg-teal-400 leading-[3rem] text-1xl">Wingspan</div>
-                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftWingspan} ft</div>
+                <div className="bg-rose-950 leading-[3rem] text-1xl text-white">Wingspan</div>
+                <div className="bg-rose-800 leading-[3rem] text-1xl text-white">{topAircraftWingspan} ft</div>
                 <div></div><div></div>
-                <div className="bg-teal-400 leading-[3rem] text-1xl">Engines</div>
-                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftEngines}</div>
+                <div className="bg-rose-950 leading-[3rem] text-1xl text-white">Engines</div>
+                <div className="bg-rose-800 leading-[3rem] text-1xl text-white">{topAircraftEngines}</div>
                 <div></div><div></div>
-                <div className="bg-teal-400 leading-[3rem] text-1xl">Engine Thrust</div>
-                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftEngineThrust} lbs</div>
+                <div className="bg-rose-950 leading-[3rem] text-1xl text-white">Engine Thrust</div>
+                <div className="bg-rose-800 leading-[3rem] text-1xl text-white">{topAircraftEngineThrust} lbs</div>
             </div>
-            <div className="pl-4 pr-4 pt-2 pb-2 bg-cyan-100">
-                <p className="leading-loose text-teal-500 font-bold">Did you know?</p>
-                <p className="text-1xl leading-normal">{topAircraftFunFact}</p>
+            <div className="pl-4 pr-4 pt-2 pb-2 bg-rose-800">
+                <p className="leading-loose text-rose-300 font-bold">Did you know?</p>
+                <p className="text-1xl text-white leading-normal">{topAircraftFunFact}</p>
             </div>
         </div>
     )

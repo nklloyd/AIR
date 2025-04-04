@@ -255,6 +255,15 @@ export function Home() {
                 <div></div>
                 <div className="bg-indigo-500 leading-[3rem] text-1xl">{nextAircraftSpeed} MPG</div>
             </div>
+            <br></br>
+            <div className="relative grid grid-cols-[3fr_3fr] grid-rows-[3fr_1fr]">
+                <div className="bg-gray-800 leading-[3rem] text-1xl">Maximum Takeoff Weight (MTOW)</div>
+                <div className="bg-gray-700 leading-[3rem] text-1xl">{nextAircraftMtow} lbs</div>
+                <div></div><div></div>
+                <div className="bg-gray-800 leading-[3rem] text-1xl">Wingspan</div>
+                <div className="bg-gray-700 leading-[3rem] text-1xl">{nextAircraftWingspan} ft</div>
+                <div></div>
+            </div>
         </div>
     )
 }

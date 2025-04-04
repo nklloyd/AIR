@@ -404,7 +404,7 @@ export function Home() {
                 <div className="bg-indigo-950 leading-[1.85rem] text-1xl text-white">Top Airline</div>
                 <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">{mlg}</div>
                 <div></div>
-                <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">{flightCount} Miles</div>
+                <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">{flightCount}</div>
                 <div></div>
                 <div className="bg-indigo-800 leading-[3.5rem] text-2xl text-white">Delta</div>
             </div>

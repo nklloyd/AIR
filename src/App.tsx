@@ -5,7 +5,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { Home } from "./pages/Home"
-import { Explore } from "./pages/Explore"
+import  Explore from "./pages/Explore"
 import { Map } from "./pages/Map"
 import { Profile } from "./pages/Profile"
 import { Navbar } from './components/Navbar'

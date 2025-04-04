@@ -3,9 +3,8 @@ import MapComponent from '../components/MapComponent';
 
 export function Map() {
     return (
-        <div>
-            <h1>Map</h1>
+        <div className="h-full w-full">
             <MapComponent />
         </div>
-    )
+    );
 }

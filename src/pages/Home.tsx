@@ -4,8 +4,9 @@
 import { useState, useEffect } from "react";
 
 export function Home() {
+
     const [username, setUsername] = useState('');
-    const [topAircraft, setTopAircraft] = useState('');
+
     const [nextFlightNumber, setNextFlightNumber] = useState('');
     const [nextFlightDate, setNextFlightDate] = useState('');
     const [nextFlightOrig, setNextFlightOrig] = useState('');
@@ -15,6 +16,7 @@ export function Home() {
     const [nextFlightAircraft, setNextFlightAircraft] = useState('');
     const [nextFlightAirline, setNextFlightAirline] = useState('');
     const [nextFlightMlg, setNextFlightMlg] = useState('');
+
     const [nextAircraftName, setNextAircraftName] = useState('');
     const [nextAircraftManufacturer, setNextAircraftManufacturer] = useState('');
     const [nextAircraftMtow, setNextAircraftMtow] = useState('');
@@ -26,6 +28,17 @@ export function Home() {
     const [nextAircraftSeats, setNextAircraftSeats] = useState('');
     const [nextAircraftFunFact, setNextAircraftFunFact] = useState('');
 
+    const [topAircraftName, setTopAircraftName] = useState('');
+    const [topAircraftManufacturer, setTopAircraftManufacturer] = useState('');
+    const [topAircraftMtow, setTopAircraftMtow] = useState('');
+    const [topAircraftEngines, setTopAircraftEngines] = useState('');
+    const [topAircraftEngineThrust, setTopAircraftEngineThrust] = useState('');
+    const [topAircraftWingspan, setTopAircraftWingspan] = useState('');
+    const [topAircraftRange, setTopAircraftRange] = useState('');
+    const [topAircraftSpeed, setTopAircraftSpeed] = useState('');
+    const [topAircraftSeats, setTopAircraftSeats] = useState('');
+    const [topAircraftFunFact, setTopAircraftFunFact] = useState('');
+
     useEffect(() => {
 
         const getUsername = async () => {
@@ -36,15 +49,6 @@ export function Home() {
             } else { alert('Error') }
         };
         getUsername();
-
-        const getTopAircraft = async () => {
-            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_name');
-            if (response.ok) {
-                const data = await response.json();
-                setTopAircraft(data.message);
-            } else { alert('Error') }
-        };
-        getTopAircraft();
 
         const getNextFlightNumber = async () => {
             const response = await fetch('http://127.0.0.1:5000/get_next_flight_number');
@@ -217,52 +221,181 @@ export function Home() {
         };
         getNextAircraftFunFact();
 
+        const getTopAircraftName = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_name');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftName(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftName();
+
+        const getTopAircraftManufacturer = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_manufacturer');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftManufacturer(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftManufacturer();
+
+        const getTopAircraftMtow = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_mtow');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftMtow(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftMtow();
+
+        const getTopAircraftEngines = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_engines');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftEngines(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftEngines();
+
+        const getTopAircraftEngineThrust = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_engine_thrust');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftEngineThrust(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftEngineThrust();
+
+        const getTopAircraftWingspan = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_wingspan');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftWingspan(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftWingspan();
+
+        const getTopAircraftRange = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_range');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftRange(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftRange();
+
+        const getTopAircraftSpeed = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_speed');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftSpeed(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftSpeed();
+
+        const getTopAircraftSeats = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_seats');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftSeats(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftSeats();
+
+        const getTopAircraftFunFact = async () => {
+            const response = await fetch('http://127.0.0.1:5000/get_top_aircraft_fun_fact');
+            if (response.ok) {
+                const data = await response.json();
+                setTopAircraftFunFact(data.message);
+            } else { alert('Error') }
+        };
+        getTopAircraftFunFact();
     }, [])
 
-    const change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
-    };
-
-    const submit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    };
-
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
             <br></br>
-            <h1>Welcome, {username}!</h1>
+            <p className="text-5xl text-slate-700">Welcome, {username}</p>
             <br></br>
+
             <p className="text-2xl">Your next flight is {nextFlightNumber} on {nextFlightDate}</p>
             <div className="grid grid-cols-[3fr_1fr_3fr] gap-0">
-                <div className="bg-indigo-900 leading-[5rem] text-4xl">{nextFlightOrig}</div>
-                <div className="bg-black-900 leading-[4.5rem] text-6xl text-indigo-400">→</div>
-                <div className="bg-indigo-900 leading-[5rem] text-4xl">{nextFlightDest}</div>
-                <div className="bg-indigo-500 leading-[2rem] text-1xl">{nextFlightDprtTime}</div>
-                <div></div>
-                <div className="bg-indigo-500 leading-[2rem] text-1xl">{nextFlightArrTime}</div>
+                <div className="bg-slate-400 leading-[5rem] text-4xl">{nextFlightOrig}</div>
+                <div className="bg-slate-400 leading-[4.5rem] text-6xl text-sky-700">→</div>
+                <div className="bg-slate-400 leading-[5rem] text-4xl">{nextFlightDest}</div>
+                <div className="bg-gray-300 leading-[2rem] text-1xl">{nextFlightDprtTime}</div>
+                <div className="bg-gray-300 leading-[2rem] text-1xl"></div>
+                <div className="bg-gray-300 leading-[2rem] text-1xl">{nextFlightArrTime}</div>
             </div>
             <br></br>
-            <p className="text-2xl">Your aircraft: {nextAircraftManufacturer} {topAircraft}</p>
+
+            <p className="text-2xl">You'll be flying on an {nextAircraftManufacturer} {nextAircraftName}</p>
             <div className="relative grid grid-cols-[2fr_0.1fr_2fr_0.1fr_2fr] grid-rows-[1fr_2fr]">
-                <div className="bg-indigo-900 leading-[1.85rem] text-1xl">Seats</div>
+                <div className="bg-slate-400 leading-[1.85rem] text-1xl">Seats</div>
                 <div></div>
-                <div className="bg-indigo-900 leading-[1.85rem] text-1xl">Range</div>
+                <div className="bg-slate-400 leading-[1.85rem] text-1xl">Range</div>
                 <div></div>
-                <div className="bg-indigo-900 leading-[1.85rem] text-1xl">Speed</div>
-                <div className="bg-indigo-500 leading-[3rem] text-1xl">{nextAircraftSeats}</div>
+                <div className="bg-slate-400 leading-[1.85rem] text-1xl">Speed</div>
+                <div className="bg-gray-300 leading-[3.5rem] text-2xl">{nextAircraftSeats}</div>
                 <div></div>
-                <div className="bg-indigo-500 leading-[3rem] text-1xl">{nextAircraftRange} Miles</div>
+                <div className="bg-gray-300 leading-[3.5rem] text-2xl">{nextAircraftRange} Miles</div>
                 <div></div>
-                <div className="bg-indigo-500 leading-[3rem] text-1xl">{nextAircraftSpeed} MPG</div>
+                <div className="bg-gray-300 leading-[3.5rem] text-2xl">{nextAircraftSpeed} MPH</div>
             </div>
             <br></br>
-            <div className="relative grid grid-cols-[3fr_3fr] grid-rows-[3fr_1fr]">
-                <div className="bg-gray-800 leading-[3rem] text-1xl">Maximum Takeoff Weight (MTOW)</div>
-                <div className="bg-gray-700 leading-[3rem] text-1xl">{nextAircraftMtow} lbs</div>
+
+            <p className="text-2xl">{nextAircraftManufacturer} {nextAircraftName}: Technical Specs</p>
+            <div className="relative grid grid-cols-[3fr_3fr] grid-rows-[3fr_1fr_3fr_1fr_3fr_1fr_3fr_1fr]">
+                <div className="bg-slate-400 leading-[3rem] text-1xl">Maximum Takeoff Weight</div>
+                <div className="bg-gray-300 leading-[3rem] text-1xl">{nextAircraftMtow} lbs</div>
                 <div></div><div></div>
-                <div className="bg-gray-800 leading-[3rem] text-1xl">Wingspan</div>
-                <div className="bg-gray-700 leading-[3rem] text-1xl">{nextAircraftWingspan} ft</div>
+                <div className="bg-slate-400 leading-[3rem] text-1xl">Wingspan</div>
+                <div className="bg-gray-300 leading-[3rem] text-1xl">{nextAircraftWingspan} ft</div>
+                <div></div><div></div>
+                <div className="bg-slate-400 leading-[3rem] text-1xl">Engines</div>
+                <div className="bg-gray-300 leading-[3rem] text-1xl">{nextAircraftEngines}</div>
+                <div></div><div></div>
+                <div className="bg-slate-400 leading-[3rem] text-1xl">Engine Thrust</div>
+                <div className="bg-gray-300 leading-[3rem] text-1xl">{nextAircraftEngineThrust} lbs</div>
+            </div>
+            <div className="pl-4 pr-4 pt-2 pb-2 bg-gray-300">
+                <p className="leading-loose text-slate-500 font-bold">Did you know?</p>
+                <p className="text-1xl leading-normal">{nextAircraftFunFact}</p>
+            </div>
+            <br></br>
+            <br></br>
+
+            <p className="text-2xl">You're top aircraft is the {topAircraftManufacturer} {topAircraftName}</p>
+            <div className="relative grid grid-cols-[2fr_0.1fr_2fr_0.1fr_2fr] grid-rows-[1fr_2fr]">
+                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Seats</div>
                 <div></div>
+                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Range</div>
+                <div></div>
+                <div className="bg-teal-400 leading-[1.85rem] text-1xl">Speed</div>
+                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftSeats}</div>
+                <div></div>
+                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftRange} Miles</div>
+                <div></div>
+                <div className="bg-cyan-100 leading-[3.5rem] text-2xl">{topAircraftSpeed} MPH</div>
+            </div>
+            <br></br>
+            <p className="text-2xl">{topAircraftManufacturer} {topAircraftName}: Technical Specs</p>
+            <div className="relative grid grid-cols-[3fr_3fr] grid-rows-[3fr_1fr_3fr_1fr_3fr_1fr_3fr_1fr]">
+                <div className="bg-teal-400 leading-[3rem] text-1xl">Maximum Takeoff Weight</div>
+                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftMtow} lbs</div>
+                <div></div><div></div>
+                <div className="bg-teal-400 leading-[3rem] text-1xl">Wingspan</div>
+                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftWingspan} ft</div>
+                <div></div><div></div>
+                <div className="bg-teal-400 leading-[3rem] text-1xl">Engines</div>
+                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftEngines}</div>
+                <div></div><div></div>
+                <div className="bg-teal-400 leading-[3rem] text-1xl">Engine Thrust</div>
+                <div className="bg-cyan-100 leading-[3rem] text-1xl">{topAircraftEngineThrust} lbs</div>
+            </div>
+            <div className="pl-4 pr-4 pt-2 pb-2 bg-cyan-100">
+                <p className="leading-loose text-teal-500 font-bold">Did you know?</p>
+                <p className="text-1xl leading-normal">{topAircraftFunFact}</p>
             </div>
         </div>
     )

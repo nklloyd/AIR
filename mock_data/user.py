@@ -13,7 +13,7 @@ app.logger.setLevel(logging.DEBUG)
 class User:
     def __init__(self, name):
         self.name = name
-        self.top_aircraft = ""
+        self.top_aircraft = []
         self.flight_count = 0
         self.mlg = 0
         self.next_flight = ""
@@ -62,6 +62,20 @@ A359 = Aircraft(
      fun_fact = "The Airbus A350 is pressurized to 6000 feet, less than the standard 8000 ft in most airaft, enhancing comfort."
 )
 
+A32Q = Aircraft(
+     name = "A321-NEO",
+     manufacturer = "Airbus",
+     mtow = 206100, #lbs
+     engines = "Pratt & Whitney PW1100G",
+     engine_thrust = 24000, #lbs
+     wingspan = 117.5, #ft
+     range = 9320, #miles
+     speed = 517, #mph
+     seats = 194,
+     fun_fact = "The Airbus A321 NEO is one of the most efficient narrobody aircraft in operation, with each passenger getting the equivalent efficiency of over 100 mpg on transcontinental flights."
+)
+
+
 # Define airlines
 Delta = Airline()
 Delta.fleet.append(A359)
@@ -71,17 +85,13 @@ DL108ATLMAD20250414 = Flight("Monday, April 14, 2025", "7:20 PM", "9:35 AM +", "
 
 # Set user data
 Nicholas = User("Nicholas")
-Nicholas.top_aircraft = A359
+Nicholas.top_aircraft = A32Q
 Nicholas.next_flight = DL108ATLMAD20250414
 
 # API Functions
 @app.route('/get_username')
 def get_username():
      return(jsonify({"message": Nicholas.name}))
-
-@app.route('/get_top_aircraft_name')
-def get_top_aircraft_name():
-     return(jsonify({"message": Nicholas.top_aircraft.name}))
 
 @app.route('/get_next_flight_date')
 def get_next_flight_date():
@@ -159,6 +169,47 @@ def get_next_aircraft_seats():
 @app.route('/get_next_aircraft_fun_fact')
 def get_next_aircraft_fun_fact():
      return(jsonify({"message": Nicholas.next_flight.aircraft.fun_fact}))
+
+# Top Aircraft API
+@app.route('/get_top_aircraft_name')
+def get_top_aircraft_name():
+     return(jsonify({"message": Nicholas.top_aircraft.name}))
+
+@app.route('/get_top_aircraft_manufacturer')
+def get_top_aircraft_manufacturer():
+     return(jsonify({"message": Nicholas.top_aircraft.manufacturer}))
+
+@app.route('/get_top_aircraft_mtow')
+def get_top_aircraft_mtow():
+     return(jsonify({"message": Nicholas.top_aircraft.mtow}))
+
+@app.route('/get_top_aircraft_engines')
+def get_top_aircraft_engines():
+     return(jsonify({"message": Nicholas.top_aircraft.engines}))
+
+@app.route('/get_top_aircraft_engine_thrust')
+def get_top_aircraft_engine_thrust():
+     return(jsonify({"message": Nicholas.top_aircraft.engine_thrust}))
+
+@app.route('/get_top_aircraft_wingspan')
+def get_top_aircraft_wingspan():
+     return(jsonify({"message": Nicholas.top_aircraft.wingspan}))
+
+@app.route('/get_top_aircraft_range')
+def get_top_aircraft_range():
+     return(jsonify({"message": Nicholas.top_aircraft.range}))
+
+@app.route('/get_top_aircraft_speed')
+def get_top_aircraft_speed():
+     return(jsonify({"message": Nicholas.top_aircraft.speed}))
+
+@app.route('/get_top_aircraft_seats')
+def get_top_aircraft_seats():
+     return(jsonify({"message": Nicholas.top_aircraft.seats}))
+
+@app.route('/get_top_aircraft_fun_fact')
+def get_top_aircraft_fun_fact():
+     return(jsonify({"message": Nicholas.top_aircraft.fun_fact}))
 
 # Start App
 if __name__ == "__main__":

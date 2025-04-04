@@ -16,9 +16,14 @@ export default function Explore() {
 
   const handleSearch = (filters: any) => {
     const fieldMap: Record<string, string> = {
+      flightNumber: "Flight Number",
       airline: "Airline",
       departureCode: "Departure Code",
+      departureAirport: "Departure Airport",
+      scheduledDeparture: "Departure Date",
       arrivalCode: "Arrival Code",
+      arrivalAirport:"Arrival Airport",
+      scheduledArrival: "Arrival Date",
       flightStatus: "Flight Status",
       departureWeather: "Departure Weather",
       arrivalWeather: "Arrival Weather",

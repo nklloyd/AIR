@@ -59,7 +59,7 @@ A359 = Aircraft(
      range = 9320, #miles
      speed = 561, #mph
      seats = 306,
-     fun_fact = "The Airbus A350 is pressurized to 6000 feet, less than the standard 8000 ft in most airaft, enhancing comfort."
+     fun_fact = "The Airbus A350 is pressurized to 6000 ft, less than the standard 8000 ft in most aircraft, enhancing comfort."
 )
 
 A32Q = Aircraft(

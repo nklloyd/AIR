@@ -15,9 +15,6 @@ export function Navbar() {
                    <Nav.Link className='navStyle' to="/Map" as={NavLink}>
                         Map
                    </Nav.Link>
-                   <Nav.Link className='navStyle' to="/Profile" as={NavLink}>
-                        Profile
-                   </Nav.Link>
                 </Nav>
             </Container>
         </NavbarBoot>

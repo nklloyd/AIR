@@ -13,10 +13,18 @@ function FlightTracker({ flight }: FlightTrackerProps) {
   const [progress, setProgress] = useState(0);
   const [showWeatherToast, setShowWeatherToast] = useState(false);
   const [weatherToastType, setWeatherToastType] = useState<'departure' | 'arrival'>('departure');
+  const [showCancelledToast, setShowCancelledToast] = useState(false);
 
-  // Simulate flight progress
+  // Check for cancelled flights first
   useEffect(() => {
-    if (!flight) return;
+    if (flight && flight['Flight Status'] === 'Cancelled') {
+      setShowCancelledToast(true);
+    }
+  }, [flight]);
+
+  // Simulate flight progress only for non-cancelled flights
+  useEffect(() => {
+    if (!flight || flight['Flight Status'] === 'Cancelled') return;
     
     const scheduledDeparture = new Date(flight['Scheduled Departure']);
     const estimatedArrival = new Date(flight['Estimated Arrival']);
@@ -41,9 +49,9 @@ function FlightTracker({ flight }: FlightTrackerProps) {
     return () => clearInterval(timer);
   }, [flight]);
 
-  // Update flight position based on current time
+  // Update flight position based on current time (only for non-cancelled flights)
   useEffect(() => {
-    if (!flight) return;
+    if (!flight || flight['Flight Status'] === 'Cancelled') return;
     
     const departureCode = flight['Departure Code'];
     const arrivalCode = flight['Arrival Code'];
@@ -92,7 +100,18 @@ function FlightTracker({ flight }: FlightTrackerProps) {
     return () => clearTimeout(timeout);
   }, [showWeatherToast]);
 
-  if (!flight || !flightPosition) return null;
+  // Hide cancelled flight toast after 8 seconds
+  useEffect(() => {
+    if (!showCancelledToast) return;
+    
+    const timeout = setTimeout(() => {
+      setShowCancelledToast(false);
+    }, 8000);
+    
+    return () => clearTimeout(timeout);
+  }, [showCancelledToast]);
+
+  if (!flight) return null;
 
   const departureCode = flight['Departure Code'];
   const arrivalCode = flight['Arrival Code'];
@@ -101,6 +120,8 @@ function FlightTracker({ flight }: FlightTrackerProps) {
   
   const departure = airportCoordinates[departureCode];
   const arrival = airportCoordinates[arrivalCode];
+  
+  const isCancelled = flight['Flight Status'] === 'Cancelled';
 
   return (
     <>
@@ -114,22 +135,71 @@ function FlightTracker({ flight }: FlightTrackerProps) {
         <Popup>{flight['Arrival Airport']} ({arrivalCode})</Popup>
       </Marker>
       
-      {/* Render flight path */}
-      <Polyline 
-        positions={[[departure.lat, departure.lng], [arrival.lat, arrival.lng]]} 
-        color={flight['Flight Status'] === 'On Time' ? 'green' : flight['Flight Status'] === 'Delayed' ? 'orange' : 'red'}
-        opacity={0.6} 
-        weight={3}
-      />
+      {/* Render flight path only for non-cancelled flights */}
+      {!isCancelled && (
+        <Polyline 
+          positions={[[departure.lat, departure.lng], [arrival.lat, arrival.lng]]} 
+          color={flight['Flight Status'] === 'On Time' ? 'green' : flight['Flight Status'] === 'Delayed' ? 'orange' : 'red'}
+          opacity={0.6} 
+          weight={3}
+        />
+      )}
       
-      {/* Render airplane position */}
-      <Marker position={[flightPosition.lat, flightPosition.lng]} icon={airplaneIcon}>
-        <Popup>
-          {flight['Flight Number']} - {flight['Airline']}<br />
-          {flight['Departure Code']} → {flight['Arrival Code']}<br />
-          Status: {flight['Flight Status']}
-        </Popup>
-      </Marker>
+      {/* Render airplane position only for non-cancelled flights */}
+      {!isCancelled && flightPosition && (
+        <Marker position={[flightPosition.lat, flightPosition.lng]} icon={airplaneIcon}>
+          <Popup>
+            {flight['Flight Number']} - {flight['Airline']}<br />
+            {flight['Departure Code']} → {flight['Arrival Code']}<br />
+            Status: {flight['Flight Status']}
+          </Popup>
+        </Marker>
+      )}
+      
+      {/* Cancelled flight toast notification */}
+      {showCancelledToast && (
+        <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg border-l-4 border-red-500 max-w-xs">
+          <div className="flex items-center">
+            <div className="mr-3 text-2xl">
+              ❌
+            </div>
+            <div>
+              <h4 className="font-medium">Flight Cancelled</h4>
+              <p className="text-sm text-gray-600">
+                Flight {flight['Flight Number']} from {flight['Departure Code']} to {flight['Arrival Code']} has been cancelled.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Weather toast */}
+      {showWeatherToast && (
+        <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg border-l-4 border-blue-500 max-w-xs">
+          <div className="flex items-center">
+            <div className="mr-3 text-2xl">
+              {weatherIcons[
+                weatherToastType === 'departure' 
+                  ? flight['Departure Weather'] 
+                  : flight['Arrival Weather']
+              ] || '🌤️'}
+            </div>
+            <div>
+              <h4 className="font-medium">Weather Alert</h4>
+              <p className="text-sm text-gray-600">
+                {weatherToastType === 'departure'
+                  ? `Departing ${flight['Departure Airport']}`
+                  : `Arriving ${flight['Arrival Airport']}`
+                }: {
+                  weatherToastType === 'departure'
+                    ? flight['Departure Weather']
+                    : flight['Arrival Weather']
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

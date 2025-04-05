@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -41,11 +43,12 @@ h1 {
 
 .navStyle {
   background-color: gray;
-  color:black;
-  display: inline;
-  padding: 5px;
-  margin: 45px;
+  color: black;
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 15px;
   font-size: 20px;
+  border-radius: 4px;
 }
 
 button {

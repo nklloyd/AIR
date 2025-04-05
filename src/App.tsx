@@ -15,7 +15,7 @@ function App() {
 return(
   <>
     <Navbar />
-    <Container className="mb-4">
+    <Container fluid className="px-4">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />

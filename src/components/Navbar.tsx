@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 
 export function Navbar() {
     return (
-        <NavbarBoot className='bg-black shadow-sm mb-3'>
-            <Container>
-                <Nav className='m-auto'>
+        <NavbarBoot className='bg-gray-500 mb-3 w-full' expand="lg">
+            <Container fluid>
+                <Nav className='w-100 d-flex justify-content-evenly'>
                    <Nav.Link className='navStyle' to="/" as={NavLink}>
                         Home
                    </Nav.Link>
@@ -14,9 +14,6 @@ export function Navbar() {
                    </Nav.Link>
                    <Nav.Link className='navStyle' to="/Map" as={NavLink}>
                         Map
-                   </Nav.Link>
-                   <Nav.Link className='navStyle' to="/Profile" as={NavLink}>
-                        Profile
                    </Nav.Link>
                 </Nav>
             </Container>

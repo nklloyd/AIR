@@ -6,6 +6,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useParams } from "react-router-dom";
 import FlightTracker from './FlightTracker';
 
 // Default marker icon adjustment
@@ -75,6 +76,7 @@ function LocationMarker() {
   const [position, setPosition] = useState<[number, number] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const map = useMap();
+  const { flightNumber } = useParams<{ flightNumber: string }>();
 
   useEffect(() => {
     map.locate()
@@ -94,6 +96,9 @@ function LocationMarker() {
 const MapComponent: React.FC = () => {
   const defaultPosition: [number, number] = [39.8283, -98.5795];
   const [flight, setFlight] = useState<Flight | null>(null);
+  const { flightNumber } = useParams<{ flightNumber: string }>();
+
+  // Consider lifting currentTime and toast state up if you need a single source of truth
   const [showWeatherToast, setShowWeatherToast] = useState(false);
   const [weatherToastType, setWeatherToastType] = useState<'departure' | 'arrival'>('departure');
   const [showCancelledToast, setShowCancelledToast] = useState(false);
@@ -119,11 +124,14 @@ const MapComponent: React.FC = () => {
           airportCoordinates[flight['Arrival Code']]
         );
         
-        if (validFlights.length > 0) {
-          const randomIndex = Math.floor(Math.random() * validFlights.length);
-          const randomFlight = validFlights[randomIndex];
-          setFlight(randomFlight);
+        const matchedFlight = validFlights.find(f => f['Flight Number'] === flightNumber);
+
+        if (matchedFlight) {
+          setFlight(matchedFlight);
+        } else {
+          console.warn("Flight not found:", flightNumber);
         }
+        
       })
       .catch(error => {
         console.error('Error fetching flight data:', error);

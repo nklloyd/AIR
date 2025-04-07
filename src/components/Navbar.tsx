@@ -3,18 +3,18 @@ import { NavLink } from 'react-router-dom'
 
 export function Navbar() {
     return (
-        <NavbarBoot className='bg-gray-500 mb-3 w-full' expand="lg">
+        <NavbarBoot className='mb-3 w-full' expand="lg">
             <Container fluid>
                 <Nav className='w-100 d-flex justify-content-evenly'>
                    <Nav.Link className='navStyle' to="/" as={NavLink}>
-                        Home
+                   🏠 Home
                    </Nav.Link>
                    <Nav.Link className='navStyle' to="/Explore" as={NavLink}>
-                        Explore
+                   🔍 Explore
                    </Nav.Link>
-                   <Nav.Link className='navStyle' to="/Map" as={NavLink}>
+                   {/* <Nav.Link className='navStyle' to="/Map" as={NavLink}>
                         Map
-                   </Nav.Link>
+                   </Nav.Link> */}
                 </Nav>
             </Container>
         </NavbarBoot>

@@ -123,7 +123,7 @@ export default function Explore() {
   <div className="flex justify-center flex-wrap mb-4">
         <div className="flex items-center gap-4">
           <div>
-            <img src="/Air Logo.png" alt="Air Logo" className="h-10" />
+            <img src="/Air Logo.png" alt="Air Logo" className="h-20" />
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-gray-1000">Explore Flights</h1>

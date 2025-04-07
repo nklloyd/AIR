@@ -6,7 +6,6 @@ import SearchDialog from './SearchDialog';
 export default function Explore() {
   const navigate = useNavigate();
 
-
   const [favorites, setFavorites] = useState<string[]>([]);
   const [flights, setFlights] = useState<any[]>([]);
   const [filteredFlights, setFilteredFlights] = useState<any[]>([]);

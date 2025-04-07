@@ -4,23 +4,22 @@ import { airportCoordinates, Flight, airplaneIcon, weatherIcons } from './MapCom
 
 interface FlightTrackerProps {
   flight: Flight | null;
+  onShowWeatherToast: (show: boolean, type: 'departure' | 'arrival') => void;
+  onShowCancelledToast: (show: boolean) => void;
 }
 
-function FlightTracker({ flight }: FlightTrackerProps) {
+function FlightTracker({ flight, onShowWeatherToast, onShowCancelledToast }: FlightTrackerProps) {
   const map = useMap();
   const [currentTime, setCurrentTime] = useState<Date>(new Date('2025-03-20T12:00:00'));
   const [flightPosition, setFlightPosition] = useState<{lat: number, lng: number} | null>(null);
   const [progress, setProgress] = useState(0);
-  const [showWeatherToast, setShowWeatherToast] = useState(false);
-  const [weatherToastType, setWeatherToastType] = useState<'departure' | 'arrival'>('departure');
-  const [showCancelledToast, setShowCancelledToast] = useState(false);
 
   // Check for cancelled flights first
   useEffect(() => {
     if (flight && flight['Flight Status'] === 'Cancelled') {
-      setShowCancelledToast(true);
+      onShowCancelledToast(true);
     }
-  }, [flight]);
+  }, [flight, onShowCancelledToast]);
 
   // Simulate flight progress only for non-cancelled flights
   useEffect(() => {
@@ -72,13 +71,11 @@ function FlightTracker({ flight }: FlightTrackerProps) {
       
       // Show departure weather toast near beginning of flight
       if (newProgress > 0.05 && newProgress < 0.1) {
-        setWeatherToastType('departure');
-        setShowWeatherToast(true);
+        onShowWeatherToast(true, 'departure');
       }
       // Show arrival weather toast near end of flight
       else if (newProgress > 0.9 && newProgress < 0.95) {
-        setWeatherToastType('arrival');
-        setShowWeatherToast(true);
+        onShowWeatherToast(true, 'arrival');
       }
       
       // Interpolate position
@@ -87,29 +84,7 @@ function FlightTracker({ flight }: FlightTrackerProps) {
       
       setFlightPosition({ lat: currentLat, lng: currentLng });
     }
-  }, [currentTime, flight]);
-
-  // Hide weather toast after 5 seconds
-  useEffect(() => {
-    if (!showWeatherToast) return;
-    
-    const timeout = setTimeout(() => {
-      setShowWeatherToast(false);
-    }, 5000);
-    
-    return () => clearTimeout(timeout);
-  }, [showWeatherToast]);
-
-  // Hide cancelled flight toast after 8 seconds
-  useEffect(() => {
-    if (!showCancelledToast) return;
-    
-    const timeout = setTimeout(() => {
-      setShowCancelledToast(false);
-    }, 8000);
-    
-    return () => clearTimeout(timeout);
-  }, [showCancelledToast]);
+  }, [currentTime, flight, onShowWeatherToast]);
 
   if (!flight) return null;
 
@@ -154,51 +129,6 @@ function FlightTracker({ flight }: FlightTrackerProps) {
             Status: {flight['Flight Status']}
           </Popup>
         </Marker>
-      )}
-      
-      {/* Cancelled flight toast notification */}
-      {showCancelledToast && (
-        <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg border-l-4 border-red-500 max-w-xs">
-          <div className="flex items-center">
-            <div className="mr-3 text-2xl">
-              ❌
-            </div>
-            <div>
-              <h4 className="font-medium">Flight Cancelled</h4>
-              <p className="text-sm text-gray-600">
-                Flight {flight['Flight Number']} from {flight['Departure Code']} to {flight['Arrival Code']} has been cancelled.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Weather toast */}
-      {showWeatherToast && (
-        <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg border-l-4 border-blue-500 max-w-xs">
-          <div className="flex items-center">
-            <div className="mr-3 text-2xl">
-              {weatherIcons[
-                weatherToastType === 'departure' 
-                  ? flight['Departure Weather'] 
-                  : flight['Arrival Weather']
-              ] || '🌤️'}
-            </div>
-            <div>
-              <h4 className="font-medium">Weather Alert</h4>
-              <p className="text-sm text-gray-600">
-                {weatherToastType === 'departure'
-                  ? `Departing ${flight['Departure Airport']}`
-                  : `Arriving ${flight['Arrival Airport']}`
-                }: {
-                  weatherToastType === 'departure'
-                    ? flight['Departure Weather']
-                    : flight['Arrival Weather']
-                }
-              </p>
-            </div>
-          </div>
-        </div>
       )}
     </>
   );

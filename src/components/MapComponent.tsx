@@ -6,6 +6,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FlightTracker from './FlightTracker';
 
 // Default marker icon adjustment
 let DefaultIcon = L.icon({
@@ -90,156 +91,12 @@ function LocationMarker() {
   return position
 }
 
-// FlightTracker component to track a single flight
-// FlightTracker component to track a single flight
-function FlightTracker({ flight }: { flight: Flight | null }) {
-  const map = useMap();
-  const [currentTime, setCurrentTime] = useState<Date>(new Date('2025-03-20T12:00:00'));
-  const [flightPosition, setFlightPosition] = useState<{ lat: number, lng: number } | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [showWeatherToast, setShowWeatherToast] = useState(false);
-  const [weatherToastType, setWeatherToastType] = useState<'departure' | 'arrival'>('departure');
-
-  // Simulate flight progress; consider cleaning up timer if flight changes
-  useEffect(() => {
-    if (!flight) return;
-    
-    const scheduledDeparture = new Date(flight['Scheduled Departure']);
-    const estimatedArrival = new Date(flight['Estimated Arrival']);
-    
-    setCurrentTime(scheduledDeparture);
-    const timer = setInterval(() => {
-      setCurrentTime(prev => {
-        const newTime = new Date(prev);
-        newTime.setMinutes(newTime.getMinutes() + 10);
-        if (newTime >= estimatedArrival) {
-          clearInterval(timer);
-          return estimatedArrival;
-        }
-        return newTime;
-      });
-    }, 1000);
-    
-    return () => clearInterval(timer);
-  }, [flight]);
-
-  // Update flight position based on current time
-  useEffect(() => {
-    if (!flight) return;
-    
-    const departureCode = flight['Departure Code'];
-    const arrivalCode = flight['Arrival Code'];
-    
-    if (airportCoordinates[departureCode] && airportCoordinates[arrivalCode]) {
-      const departure = airportCoordinates[departureCode];
-      const arrival = airportCoordinates[arrivalCode];
-      
-      const scheduledDeparture = new Date(flight['Scheduled Departure']);
-      const estimatedArrival = new Date(flight['Estimated Arrival']);
-      
-      const totalFlightTime = estimatedArrival.getTime() - scheduledDeparture.getTime();
-      const elapsed = currentTime.getTime() - scheduledDeparture.getTime();
-      const newProgress = Math.min(Math.max(elapsed / totalFlightTime, 0), 1);
-      
-      setProgress(newProgress);
-      
-      if (newProgress > 0.05 && newProgress < 0.1) {
-        setWeatherToastType('departure');
-        setShowWeatherToast(true);
-      } else if (newProgress > 0.9 && newProgress < 0.95) {
-        setWeatherToastType('arrival');
-        setShowWeatherToast(true);
-      }
-      
-      const currentLat = departure.lat + (arrival.lat - departure.lat) * newProgress;
-      const currentLng = departure.lng + (arrival.lng - departure.lng) * newProgress;
-      
-      setFlightPosition({ lat: currentLat, lng: currentLng });
-    }
-  }, [currentTime, flight]);
-
-  // Hide weather toast after 5 seconds
-  useEffect(() => {
-    if (!showWeatherToast) return;
-    
-    const timeout = setTimeout(() => {
-      setShowWeatherToast(false);
-    }, 5000);
-    
-    return () => clearTimeout(timeout);
-  }, [showWeatherToast]);
-
-  if (!flight || !flightPosition) return null;
-
-  const departure = airportCoordinates[flight['Departure Code']];
-  const arrival = airportCoordinates[flight['Arrival Code']];
-
-  return (
-    <>
-      <Marker position={[departure.lat, departure.lng]} icon={DefaultIcon}>
-        <Popup>{flight['Departure Airport']} ({flight['Departure Code']})</Popup>
-      </Marker>
-      
-      <Marker position={[arrival.lat, arrival.lng]} icon={DefaultIcon}>
-        <Popup>{flight['Arrival Airport']} ({flight['Arrival Code']})</Popup>
-      </Marker>
-      
-      {/* Render flight path only if flight is not cancelled */}
-      {flight['Flight Status'] !== 'Cancelled' && (
-        <Polyline 
-          positions={[[departure.lat, departure.lng], [arrival.lat, arrival.lng]]} 
-          color={
-            flight['Flight Status'] === 'On Time' ? 'green' :
-            flight['Flight Status'] === 'Delayed' ? 'orange' : 'red'
-          }
-          opacity={0.6} 
-          weight={3}
-        />
-      )}
-      
-      <Marker position={[flightPosition.lat, flightPosition.lng]} icon={airplaneIcon}>
-        <Popup>
-          {flight['Flight Number']} - {flight['Airline']}<br />
-          {flight['Departure Code']} → {flight['Arrival Code']}<br />
-          Status: {flight['Flight Status']}
-        </Popup>
-      </Marker>
-      
-      {showWeatherToast && (
-        <div className="absolute top-4 right-4 z-50 bg-white p-3 rounded-lg shadow-lg border-l-4 border-blue-500 max-w-xs">
-          <div className="flex items-center">
-            <div className="mr-3 text-2xl">
-              {weatherIcons[
-                weatherToastType === 'departure' 
-                  ? flight['Departure Weather'] 
-                  : flight['Arrival Weather']
-              ] || '🌤️'}
-            </div>
-            <div>
-              <h4 className="font-medium">Weather Alert</h4>
-              <p className="text-sm text-gray-600">
-                {weatherToastType === 'departure'
-                  ? `Departing ${flight['Departure Airport']}`
-                  : `Arriving ${flight['Arrival Airport']}`
-                }: {
-                  weatherToastType === 'departure'
-                    ? flight['Departure Weather']
-                    : flight['Arrival Weather']
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-
 const MapComponent: React.FC = () => {
   const defaultPosition: [number, number] = [39.8283, -98.5795];
   const [flight, setFlight] = useState<Flight | null>(null);
-  // Consider lifting currentTime and toast state up if you need a single source of truth
+  const [showWeatherToast, setShowWeatherToast] = useState(false);
+  const [weatherToastType, setWeatherToastType] = useState<'departure' | 'arrival'>('departure');
+  const [showCancelledToast, setShowCancelledToast] = useState(false);
 
   useEffect(() => {
     fetch('/mock_data/mock_flight_data.csv')
@@ -273,23 +130,106 @@ const MapComponent: React.FC = () => {
       });
   }, []);
 
+  // Handle weather toast visibility
+  const handleShowWeatherToast = (show: boolean, type: 'departure' | 'arrival') => {
+    setWeatherToastType(type);
+    setShowWeatherToast(show);
+    
+    if (show) {
+      // fade the toast out after 5 seconds
+      setTimeout(() => {
+        setShowWeatherToast(false);
+      }, 5000);
+    }
+  };
+
+  // Handle cancelled flight toast visibility
+  const handleShowCancelledToast = (show: boolean) => {
+    setShowCancelledToast(show);
+    
+    if (show) {
+      // Auto-hide toast after 8 seconds
+      setTimeout(() => setShowCancelledToast(false), 8000);
+    }
+  };
+
   return (
     <div className="flex h-full w-full relative" style={{ height: "calc(100vh - 120px)" }}>
-      <MapContainer 
-        center={defaultPosition} 
-        zoom={4} 
-        className="h-full w-3/4"
-        style={{ height: "100%" }}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          subdomains="abcd"
-          maxZoom={19}
-        />
-        <LocationMarker />
-        <FlightTracker flight={flight} />
-      </MapContainer>
+      {/* Weather toast notification */}
+      {showWeatherToast && flight && (
+        <div className="absolute top-4 right-4 z-[9999] bg-white p-3 rounded-lg shadow-lg border-l-4 border-blue-500 max-w-xs">
+          <div className="flex items-center">
+            <div className="mr-3 text-2xl">
+              {weatherIcons[
+                weatherToastType === 'departure' 
+                  ? flight['Departure Weather'] 
+                  : flight['Arrival Weather']
+              ] || '🌤️'}
+            </div>
+            <div>
+              <h4 className="font-medium">Weather Alert</h4>
+              <p className="text-sm text-gray-600">
+                {weatherToastType === 'departure'
+                  ? `Departing ${flight['Departure Airport']}`
+                  : `Arriving ${flight['Arrival Airport']}`
+                }: {
+                  weatherToastType === 'departure'
+                    ? flight['Departure Weather']
+                    : flight['Arrival Weather']
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Cancelled flight toast notification */}
+      {showCancelledToast && flight && (
+        <div className="absolute top-4 right-4 z-[9999] bg-white p-3 rounded-lg shadow-lg border-l-4 border-red-500 max-w-xs">
+          <div className="flex items-center">
+            <div className="mr-3 text-2xl">
+              ❌
+            </div>
+            <div>
+              <h4 className="font-medium">Flight Cancelled</h4>
+              <p className="text-sm text-gray-600">
+                Flight {flight['Flight Number']} from {flight['Departure Code']} to {flight['Arrival Code']} has been cancelled.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+<MapContainer 
+  center={defaultPosition} 
+  zoom={4} 
+  className="h-full w-3/4"
+  style={{ height: "100%" }}
+>
+  {/* Base layer */}
+  <TileLayer
+    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    subdomains="abcd"
+    maxZoom={19}
+  />
+
+  {/* Precipitation overlay */}
+  <TileLayer
+    url=""
+    attribution="Map data © OpenWeatherMap"
+    maxZoom={19}
+    opacity={0.5}
+  />
+
+  <LocationMarker />
+  <FlightTracker 
+    flight={flight} 
+    onShowWeatherToast={handleShowWeatherToast}
+    onShowCancelledToast={handleShowCancelledToast}
+  />
+</MapContainer>
+
       
       <div className="w-1/4 bg-gray-100 p-4 overflow-y-auto shadow-lg" style={{ height: "100%" }}>
         <h3 className="text-xl font-semibold mb-4 text-gray-800">Flight Information</h3>
@@ -315,23 +255,14 @@ const MapComponent: React.FC = () => {
               <span className={
                 flight['Flight Status'] === 'On Time' ? 'text-green-600 ml-2' : 
                 flight['Flight Status'] === 'Delayed' ? 'text-orange-500 ml-2' : 
-                'text-red-600 ml-2'
+                'text-red-500 ml-2'
               }>
                 {flight['Flight Status']}
               </span>
             </p>
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="font-semibold mb-2">Weather:</p>
-              <div className="flex justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Departure</p>
-                  <p>{weatherIcons[flight['Departure Weather']] || ''} {flight['Departure Weather']}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Arrival</p>
-                  <p>{weatherIcons[flight['Arrival Weather']] || ''} {flight['Arrival Weather']}</p>
-                </div>
-              </div>
+              <p>{weatherIcons[flight['Departure Weather']] || ''} {flight['Departure Weather']}</p>
             </div>
           </div>
         ) : (

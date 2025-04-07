@@ -115,10 +115,18 @@ export default function Explore() {
     >
       
 
-      <h1 className="text-xl font-semibold mb-2">Explore Flights</h1>
-      <div className="p-4">
-        <SearchDialog onSearch={handleSearch} />
+  <div className="flex justify-center flex-wrap mb-4">
+        <div className="flex items-center gap-4">
+          <div>
+            <img src="/Air Logo.png" alt="Air Logo" className="h-10" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-1000">Explore Flights</h1>
+            <SearchDialog onSearch={handleSearch} />            
+          </div>
+        </div>
       </div>
+
 
       {/* Dropdown menu */}
       {dropdown.visible && dropdown.flightNumber && (

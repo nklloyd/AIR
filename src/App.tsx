@@ -10,6 +10,7 @@ import { Map } from "./pages/Map"
 import { Profile } from "./pages/Profile"
 import { Navbar } from './components/Navbar'
 import { Toaster } from "react-hot-toast"
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </Container>
+      <Footer />
       <Toaster position="bottom-right" />
     </>
   );

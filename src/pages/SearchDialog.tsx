@@ -99,7 +99,7 @@ export default function SearchDialog({ onSearch }: Props) {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 justify-center items-center">
+        <div className="justify-center fixed inset-0 bg-black/50">
           <div className=" w-full max-w-6xl bg-white rounded-3xl shadow-xl border border-gray-200 p-8 md:p-12">
 
 

@@ -348,6 +348,12 @@ export function Home() {
             <p className="text-5xl text-slate-700">Welcome, {username}</p>
             <br></br>
 
+            <p className="text-2xl">Your favorite flights:</p>
+            <div className="grid grid-cols-[1fr] gap-1">
+                <div className="bg-slate-200 leading-[5rem] text-2xl">DL611 LAX-ATL</div>
+            </div>
+            <br></br>
+
             <p className="text-2xl">Your next flight is {nextFlightNumber} on {nextFlightDate}</p>
             <div className="grid grid-cols-[3fr_1fr_3fr] gap-0">
                 <div className="bg-slate-400 leading-[5rem] text-4xl">{nextFlightOrig}</div>

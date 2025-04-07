@@ -80,12 +80,17 @@ export default function Explore() {
   }, [favorites]);
 
   useEffect(() => {
-    if (selectedFlight) {
-      localStorage.setItem("selectedFlight", selectedFlight);
-    } else {
-      localStorage.removeItem("selectedFlight");
-    }
+    // if (selectedFlight) {
+    //   localStorage.setItem("selectedFlight", selectedFlight);
+    // } else {
+    //   localStorage.removeItem("selectedFlight");
+    // }
   }, [selectedFlight]);
+  if (selectedFlight) {
+    localStorage.setItem("selectedFlight", selectedFlight);
+  } else {
+    localStorage.removeItem("selectedFlight");
+  }
 
   const toggleFavorite = (flightNumber: string) => {
     const isFav = favorites.includes(flightNumber);

@@ -341,6 +341,7 @@ export function Home() {
         };
         getTopAircraftFunFact();
     }, [])
+    var favorite = localStorage.getItem("selectedFlight");
 
     return (
         <div className="flex flex-col gap-4">
@@ -350,7 +351,7 @@ export function Home() {
 
             <p className="text-2xl">Your favorite flights:</p>
             <div className="grid grid-cols-[1fr] gap-1">
-                <div className="bg-slate-200 leading-[5rem] text-2xl">DL611 LAX-ATL</div>
+                <div className="bg-slate-200 leading-[5rem] text-2xl">{favorite}</div>
             </div>
             <br></br>
 

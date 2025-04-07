@@ -75,17 +75,18 @@ export default function Explore() {
   
 
   // Save favorites + selection to localStorage
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  // useEffect(() => {
+  //   localStorage.setItem("favorites", JSON.stringify(favorites));
+  // }, [favorites]);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 
-  useEffect(() => {
+  // useEffect(() => {
     // if (selectedFlight) {
     //   localStorage.setItem("selectedFlight", selectedFlight);
     // } else {
     //   localStorage.removeItem("selectedFlight");
     // }
-  }, [selectedFlight]);
+  // }, [selectedFlight]);
   if (selectedFlight) {
     localStorage.setItem("selectedFlight", selectedFlight);
   } else {

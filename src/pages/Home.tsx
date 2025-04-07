@@ -341,7 +341,7 @@ export function Home() {
         };
         getTopAircraftFunFact();
     }, [])
-    var favorite = localStorage.getItem("selectedFlight");
+    var favorite = localStorage.getItem("favorites");
 
     return (
         <div className="flex flex-col gap-4">

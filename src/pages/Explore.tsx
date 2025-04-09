@@ -75,17 +75,23 @@ export default function Explore() {
   
 
   // Save favorites + selection to localStorage
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  // useEffect(() => {
+  //   localStorage.setItem("favorites", JSON.stringify(favorites));
+  // }, [favorites]);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 
-  useEffect(() => {
-    if (selectedFlight) {
-      localStorage.setItem("selectedFlight", selectedFlight);
-    } else {
-      localStorage.removeItem("selectedFlight");
-    }
-  }, [selectedFlight]);
+  // useEffect(() => {
+    // if (selectedFlight) {
+    //   localStorage.setItem("selectedFlight", selectedFlight);
+    // } else {
+    //   localStorage.removeItem("selectedFlight");
+    // }
+  // }, [selectedFlight]);
+  if (selectedFlight) {
+    localStorage.setItem("selectedFlight", selectedFlight);
+  } else {
+    localStorage.removeItem("selectedFlight");
+  }
 
   const toggleFavorite = (flightNumber: string) => {
     const isFav = favorites.includes(flightNumber);
@@ -117,7 +123,7 @@ export default function Explore() {
   <div className="flex justify-center flex-wrap mb-4">
         <div className="flex items-center gap-4">
           <div>
-            <img src="/Air Logo.png" alt="Air Logo" className="h-10" />
+            <img src="/Air Logo.png" alt="Air Logo" className="h-20" />
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-gray-1000">Explore Flights</h1>

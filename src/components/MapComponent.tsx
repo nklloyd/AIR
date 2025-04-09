@@ -116,12 +116,12 @@ const MapComponent: React.FC = () => {
           headers.forEach((header, index) => {
             entry[header] = values[index];
           });
-          return entry as Flight;
+          return entry as unknown as Flight;
         }).filter(flight => Boolean(flight['Flight Number']));
         
         const validFlights = parsedFlights.filter(flight =>
-          airportCoordinates[flight['Departure Code']] &&
-          airportCoordinates[flight['Arrival Code']]
+          airportCoordinates[flight['Departure Code'] as keyof typeof airportCoordinates] &&
+          airportCoordinates[flight['Arrival Code'] as keyof typeof airportCoordinates]
         );
         
         const matchedFlight = validFlights.find(f => f['Flight Number'] === flightNumber);
@@ -169,9 +169,10 @@ const MapComponent: React.FC = () => {
           <div className="flex items-center">
             <div className="mr-3 text-2xl">
               {weatherIcons[
-                weatherToastType === 'departure' 
+                (weatherToastType === 'departure' 
                   ? flight['Departure Weather'] 
                   : flight['Arrival Weather']
+                ) as keyof typeof weatherIcons
               ] || '🌤️'}
             </div>
             <div>
@@ -221,15 +222,6 @@ const MapComponent: React.FC = () => {
     subdomains="abcd"
     maxZoom={19}
   />
-
-  {/* Precipitation overlay */}
-  <TileLayer
-    url=""
-    attribution="Map data © OpenWeatherMap"
-    maxZoom={19}
-    opacity={0.5}
-  />
-
   <LocationMarker />
   <FlightTracker 
     flight={flight} 
@@ -270,7 +262,7 @@ const MapComponent: React.FC = () => {
             </p>
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="font-semibold mb-2">Weather:</p>
-              <p>{weatherIcons[flight['Departure Weather']] || ''} {flight['Departure Weather']}</p>
+              <p>{weatherIcons[flight['Departure Weather'] as keyof typeof weatherIcons] || ''} {flight['Departure Weather']}</p>
             </div>
           </div>
         ) : (

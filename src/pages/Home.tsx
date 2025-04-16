@@ -348,27 +348,27 @@ export function Home() {
     let fav1
     if (favorite?.[6]) {
         fav1 = "" + favorite?.[2] + favorite?.[3] + favorite?.[4] + favorite?.[5] + favorite?.[6]
-    } else { fav1 = "Add more favorites in explore" }
+    } else { fav1 = "Add favorites in explore" }
 
     let fav2
     if (favorite?.[14]) {
         fav2 = "" + favorite?.[10] + favorite?.[11] + favorite?.[12] + favorite?.[13] + favorite?.[14]
-    } else { fav2 = "Add more favorites in explore" }
+    } else { fav2 = "Add favorites in explore" }
 
     let fav3
     if (favorite?.[22]) {
         fav3 = "" + favorite?.[18] + favorite?.[19] + favorite?.[20] + favorite?.[21] + favorite?.[22]
-    } else { fav3 = "Add more favorites in explore" }
+    } else { fav3 = "Add favorites in explore" }
 
     let fav4
     if (favorite?.[30]) {
         fav4 = "" + favorite?.[26] + favorite?.[27] + favorite?.[28] + favorite?.[29] + favorite?.[30]
-    } else { fav4 = "Add more favorites in explore" }
+    } else { fav4 = "Add favorites in explore" }
 
     let fav5
     if (favorite?.[38]) {
         fav5 = "" + favorite?.[34] + favorite?.[35] + favorite?.[36] + favorite?.[37] + favorite?.[38]
-    } else { fav5 = "Add more favorites in explore" }
+    } else { fav5 = "Add favorites in explore" }
 
     return (
         <div className="flex flex-col gap-4">
@@ -379,15 +379,25 @@ export function Home() {
             <p className="text-2xl">Your favorite flights:</p>
             <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] gap-1">
                 <button onClick={() => {navigate(`/map/${fav1}`); }} className="bg-sky-700 hover:bg-sky-800 leading-[5rem] text-3xl text-white">
-                {fav1}</button>
+                <p></p>
+                <p className="leading-normal">{fav1}</p>
+                </button>
                 <button onClick={() => {navigate(`/map/${fav2}`); }} className="bg-sky-700 hover:bg-sky-800 leading-[5rem] text-3xl text-white">
-                {fav2}</button>
+                <p></p>
+                <p className="leading-normal">{fav2}</p>
+                </button>
                 <button onClick={() => {navigate(`/map/${fav3}`); }} className="bg-sky-700 hover:bg-sky-800 leading-[5rem] text-3xl text-white">
-                {fav3}</button>
+                <p></p>
+                <p className="leading-normal">{fav3}</p>
+                </button>
                 <button onClick={() => {navigate(`/map/${fav4}`); }} className="bg-sky-700 hover:bg-sky-800 leading-[5rem] text-3xl text-white">
-                {fav4}</button>
+                <p></p>
+                <p className="leading-normal">{fav4}</p>
+                </button>
                 <button onClick={() => {navigate(`/map/${fav5}`); }} className="bg-sky-700 hover:bg-sky-800 leading-[5rem] text-3xl text-white">
-                {fav5}</button>
+                <p></p>
+                <p className="leading-normal">{fav5}</p>
+                </button>
             </div>
             <br></br>
 

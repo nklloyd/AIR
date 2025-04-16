@@ -38,6 +38,7 @@ export default function Explore() {
   
   // Load favorites + selection from localStorage
   useEffect(() => {
+    initializeFavorites();
     fetch('/mock_data/mock_flight_data.csv')
       .then(res => res.text())
       .then(csv => {
@@ -93,8 +94,31 @@ export default function Explore() {
     localStorage.removeItem("selectedFlight");
   }
 
+  const initializeFavorites = () => {
+    let storedFavs = localStorage.getItem("favorite")
+    let Favs
+    if (storedFavs){
+      Favs = JSON.parse(storedFavs)
+    } else {
+      Favs = []
+    }
+    setFavorites(Favs);
+  }
+
   const toggleFavorite = (flightNumber: string) => {
     const isFav = favorites.includes(flightNumber);
+
+    if (!isFav) {
+      toast[favorites.length >= 5 ? "error" : "success"](
+        favorites.length >= 5
+          ? `You may only add 5 flights at a time. Please select a flight to remove from favorites.`
+          : ` `,
+        { duration: 5000 }
+      );
+      if (favorites.length >= 5) {
+        return;
+      }
+    }
     const updated = isFav
       ? favorites.filter(f => f !== flightNumber)
       : [...favorites, flightNumber];
@@ -110,7 +134,7 @@ export default function Explore() {
   };
 
   return (
-    
+
     <div
       className="p-4 space-y-4 relative"
       onClick={() => {

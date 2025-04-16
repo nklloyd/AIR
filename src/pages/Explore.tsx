@@ -95,7 +95,13 @@ export default function Explore() {
   }
 
   const initializeFavorites = () => {
-    let storedFavs = localStorage.getItem("favorite")
+    let storedFavs
+    try {
+      storedFavs = localStorage.getItem("favorite")
+    } catch (error) {
+      storedFavs = ""
+    }
+    
     let Favs
     if (storedFavs){
       Favs = JSON.parse(storedFavs)

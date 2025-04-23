@@ -75,7 +75,7 @@ export default function SearchDialog({ onSearch }: Props) {
       <div className="flex flex-col items-center my-4">
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-blue-600 px-20 py-35 rounded-xl shadow hover:bg-blue-700 transition"
+          className="text-white bg-blue-600 px-20 py-35 rounded-xl shadow hover:bg-blue-700 transition"
         >
           🔍 Find Flights
         </button>

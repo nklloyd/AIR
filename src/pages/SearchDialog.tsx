@@ -99,10 +99,8 @@ export default function SearchDialog({ onSearch }: Props) {
       </div>
 
       {isOpen && (
-        <div className="justify-center fixed inset-0 bg-black/50">
+        <div className="fixed inset-0 flex flex-col items-center justify-center bg-black/50">
           <div className=" w-full max-w-6xl bg-white rounded-3xl shadow-xl border border-gray-200 p-8 md:p-12">
-
-
             <h2 className="text-3xl font-bold mb-10 text-center text-blue-700">Search Flights</h2>
 
             {/* Horizontal Flex Layout */}
@@ -118,6 +116,7 @@ export default function SearchDialog({ onSearch }: Props) {
                     onChange={handleChange}
                     className="border border-gray-300 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-400"
                   />
+                  <div></div>
                   <Select
                     name="airline"
                     options={AIRLINE_OPTIONS}
@@ -149,6 +148,7 @@ export default function SearchDialog({ onSearch }: Props) {
                     onChange={handleChange}
                     className="border border-gray-300 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-400"
                   />
+                  <div></div>
                   <Select
                     name="departureWeather"
                     options={WEATHER_OPTIONS}
@@ -174,6 +174,7 @@ export default function SearchDialog({ onSearch }: Props) {
                     onChange={handleChange}
                     className="border border-gray-300 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-400"
                   />
+                  <div></div>
                   <Select
                     name="arrivalWeather"
                     options={WEATHER_OPTIONS}

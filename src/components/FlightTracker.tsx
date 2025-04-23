@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Marker, Popup, useMap, Polyline } from 'react-leaflet';
-import { airportCoordinates, Flight, airplaneIcon, weatherIcons } from './MapComponent';
+import { airportCoordinates, Flight, airplaneIconEast, weatherIcons, airplaneIconWest } from './MapComponent';
 
 interface FlightTrackerProps {
   flight: Flight | null;
@@ -122,7 +122,13 @@ function FlightTracker({ flight, onShowWeatherToast, onShowCancelledToast }: Fli
       
       {/* Render airplane position only for non-cancelled flights */}
       {!isCancelled && flightPosition && (
-        <Marker position={[flightPosition.lat, flightPosition.lng]} icon={airplaneIcon}>
+        // if departure airport is to the right of arrivalairport, use airplaneIconWest, else use airplaneIconEast
+        <Marker
+          position={[flightPosition.lat, flightPosition.lng]}
+          icon={
+            departure.lng > arrival.lng ? airplaneIconWest : airplaneIconEast
+          }
+        >
           <Popup>
             {flight['Flight Number']} - {flight['Airline']}<br />
             {flight['Departure Code']} → {flight['Arrival Code']}<br />

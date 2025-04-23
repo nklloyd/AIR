@@ -18,10 +18,18 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 // Custom airplane icon
-export const airplaneIcon = new L.Icon({
+export const airplaneIconEast = new L.Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61212.png',
   iconSize: [24, 24],
-  iconAnchor: [12, 24], // Adjusted to align the bottom center
+  iconAnchor: [12, 14], // Adjusted to align the bottom center
+});
+
+export const airplaneIconWest = new L.Icon({ 
+  iconUrl: '../src/assets/61212.png',
+  iconSize: [24, 24],
+  iconAnchor: [12, 14], // Adjusted to align the bottom center
+  rotationOrigin: 'center',
+  rotationAngle: -90,
 });
 
 // Weather icon mapping

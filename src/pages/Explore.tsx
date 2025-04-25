@@ -8,8 +8,8 @@ export default function Explore() {
 
   const [favorites, setFavorites] = useState<string[]>([]);
   const [flights, setFlights] = useState<any[]>([]);
-  const [filteredFlights, setFilteredFlights] = useState<any[]>([]);
-
+  const [filteredFlights, setFilteredFlights] = useState<any[] | null>(null);
+  const rowsToShow = filteredFlights === null ? flights : filteredFlights;
   const [selectedFlight, setSelectedFlight] = useState<string | null>(null);
   const [dropdown, setDropdown] = useState<{
     visible: boolean;
@@ -63,6 +63,8 @@ export default function Explore() {
           scheduledDeparture: f["Scheduled Departure"],
           scheduledArrival: f["Scheduled Arrival"],
           flightStatus: f["Flight Status"],
+          departureWeather: f["Departure Weather"],
+          arrivalWeather:  f["Arrival Weather"]
         }));
   
         setFlights(normalized);
@@ -72,22 +74,8 @@ export default function Explore() {
       });
   }, []);
   
-  
-  
-
-  // Save favorites + selection to localStorage
-  // useEffect(() => {
-  //   localStorage.setItem("favorites", JSON.stringify(favorites));
-  // }, [favorites]);
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
-  // useEffect(() => {
-    // if (selectedFlight) {
-    //   localStorage.setItem("selectedFlight", selectedFlight);
-    // } else {
-    //   localStorage.removeItem("selectedFlight");
-    // }
-  // }, [selectedFlight]);
   if (selectedFlight) {
     localStorage.setItem("selectedFlight", selectedFlight);
   } else {
@@ -208,7 +196,7 @@ export default function Explore() {
             </tr>
           </thead>
           <tbody>
-          {(filteredFlights.length > 0 ? filteredFlights : flights).map((flight) => {
+          {(rowsToShow).map((flight) => {
               const flightNumber = String(flight.flightNumber);
               const isFavorited = favorites.includes(flightNumber);
               const isSelected = selectedFlight === flightNumber;
@@ -257,7 +245,13 @@ export default function Explore() {
                   <td className="p-3">{flight.flightStatus}</td>
                 </tr>
               );
-            })}
+            }
+            )}            
+            {filteredFlights !== null && rowsToShow.length === 0 && (
+              <p className="items-center mt-6 text-gray-500">
+                No flights match these filters.
+              </p>
+            )}
           </tbody>
         </table>
       </div>

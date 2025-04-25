@@ -28,7 +28,7 @@ const FILTER_LABELS: Record<string, string> = {
     departureCode: "Departure Code",
     arrivalCode: "Arrival Code",
     scheduledDeparture: "Departure Date",
-    arrivalDate: "Arrival Date",
+    scheduledArrival: "Arrival Date",
     flightStatus: "Flight Status",
     departureWeather: "Departure Weather",
     arrivalWeather: "Arrival Weather",
@@ -60,10 +60,11 @@ export default function SearchDialog({ onSearch }: Props) {
   };
 
   const handleRemoveFilter = (key: keyof SearchFilters) => {
-    const updated = { ...filters };
-    delete updated[key];
-    setFilters(updated);
+    const { [key]: _removed, ...rest } = filters;
+    setFilters(rest);
+    onSearch(rest);
   };
+  
 
   const handleSubmit = () => {
     onSearch(filters);
@@ -74,7 +75,11 @@ export default function SearchDialog({ onSearch }: Props) {
     <>
       <div className="flex flex-col items-center my-4">
         <button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {          
+            setFilters({})
+            setIsOpen(true)
+          }
+        }
           className="bg-blue-600 px-20 py-35 rounded-xl shadow hover:bg-blue-700 transition"
         >
           🔍 Find Flights
@@ -169,7 +174,7 @@ export default function SearchDialog({ onSearch }: Props) {
                     onChange={opt => handleSelectChange("arrivalCode", opt)}
                   />
                   <input
-                    name="arrivalDate"
+                    name="scheduledArrival"
                     type="date"
                     onChange={handleChange}
                     className="border border-gray-300 p-3 rounded-xl w-full focus:ring-2 focus:ring-blue-400"
